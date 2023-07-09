@@ -1,9 +1,11 @@
+import os
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 def generate_answer(q_sentence: str):
-    model_id = "nlpai-lab/kullm-polyglot-5.8b-v2"
+    model_id = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "model")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model = AutoModelForCausalLM.from_pretrained(model_id, device_map={"":0})
 
