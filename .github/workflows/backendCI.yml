@@ -1,0 +1,32 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: CI for backend
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  CI:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Update Code
+      run: git pull
+      working-directory: level3_nlp_finalproject-nlp-08
+      
+    - name: install dependencies
+      run: |
+        source github_actions/bin/activate
+        pip install -r requirements.txt
+      working-directory: level3_nlp_finalproject-nlp-08/backend
+      
+    - name: Test with pytest
+      run: |
+        source github_actions/bin/activate
+        pytest
+      working-directory: level3_nlp_finalproject-nlp-08/backend
