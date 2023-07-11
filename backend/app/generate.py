@@ -1,14 +1,7 @@
-import os
-
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-def generate_answer(q_sentence: str):
-    model_id = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "model")
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map={"":0})
-
+def generate_answer(q_sentence: str, model, tokenizer):
     model.eval()
     model.config.use_cache = True  # silence the warnings. Please re-enable for inference!
     model.float()
