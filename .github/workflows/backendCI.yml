@@ -5,28 +5,33 @@ name: CI for backend
 
 on:
   push:
+    paths:
+      - "backend"
     branches: [ "develop" ]
   pull_request:
+    paths:
+      - "backend"
     branches: [ "develop" ]
 
 jobs:
   CI:
-
     runs-on: self-hosted
+    env:
+      working-directory: level3_nlp_finalproject-nlp-08
 
     steps:
     - name: Update Code
       run: git pull
-      working-directory: level3_nlp_finalproject-nlp-08
+      working-directory: ${{ env.working-directory }}
       
     - name: install dependencies
       run: |
         source github_actions/bin/activate
         pip install -r requirements.txt
-      working-directory: level3_nlp_finalproject-nlp-08/backend
+      working-directory: "${{ env.working-directory }}/backend"
       
     - name: Test with pytest
       run: |
         source github_actions/bin/activate
         pytest
-      working-directory: level3_nlp_finalproject-nlp-08/backend
+      working-directory: "${{ env.working-directory }}/backend"
