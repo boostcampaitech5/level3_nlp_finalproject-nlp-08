@@ -1,15 +1,44 @@
+import logging
+import os
 import pickle
 import re
+import time
+from contextlib import contextmanager
 from urllib.request import urlopen
 
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.remote_connection import \
+    LOGGER as selenium_logger
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from tqdm.auto import tqdm
+from utils import utilize_loggers
 from webdriver_manager.chrome import ChromeDriverManager
+
+selenium_logger.setLevel(logging.WARNING)
+os.environ["WDM_LOG"] = "0"
+
+
+@contextmanager
+def timer():
+    t0 = time.time()
+    yield lambda: time.time() - t0
+
+
+def measure_elapsed_time(timer_name):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            with timer() as elapsed_time:
+                result = func(*args, **kwargs)
+                logger.info(f"{elapsed_time():>8.3f} seconds elapsed @ {timer_name}")
+            return result
+
+        return wrapper
+
+    return decorator
 
 
 class QADataCrawler:
@@ -27,8 +56,11 @@ class QADataCrawler:
             ChromeDriverManager().install()
         )
         self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("headless")
+
         self.driver = webdriver.Chrome(
-            service=self.chrome_service, options=self.chrome_options
+            service=self.chrome_service,
+            options=self.chrome_options,
         )
 
         self.chrome_service.start()
@@ -36,19 +68,17 @@ class QADataCrawler:
     def quit_driver(self):
         self.driver.quit()
 
+    @measure_elapsed_time("Total Crawling Process")
     def get_data(self):
         case_ids = self._get_all_case_ids()
-        case_info = []
-
-        for case_id in tqdm(case_ids):
-            case_info.append(self._get_case_content_by_id(case_id))
+        case_info = self._get_all_case_contents(case_ids)
 
         self._save_dataframe(case_info)
 
     def _get_case_id(self):
         case_ids = []
         element_xpath = "//a[contains(@onclick, 'fn_inquire_detail')]"
-        WebDriverWait(self.driver, 100).until(
+        WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, element_xpath))
         )
         elements = self.driver.find_elements(By.XPATH, element_xpath)
@@ -60,7 +90,9 @@ class QADataCrawler:
             case_ids.append(match.group(2))
         return case_ids
 
+    @measure_elapsed_time("Get all case ids")
     def _get_all_case_ids(self, save_id_list=False):
+        is_crawling_finished = False
         page_move_cnt = 0
         page_number = 1
         page_idx = 2
@@ -69,10 +101,7 @@ class QADataCrawler:
         self.driver.get(self.board_url)
         case_ids.extend(self._get_case_id())
 
-        while True:
-            # test
-            if page_move_cnt == 1:
-                break
+        while not is_crawling_finished:
             try:
                 next_page = self.driver.find_element(
                     By.XPATH,
@@ -88,7 +117,7 @@ class QADataCrawler:
                     page_idx = 2
                     page_move_cnt += 1
                 except:
-                    print("End of Boards.")
+                    is_crawling_finished = True
                     break
 
             next_page.click()
@@ -113,6 +142,15 @@ class QADataCrawler:
 
         return case_info
 
+    @measure_elapsed_time("Get all case contents")
+    def _get_all_case_contents(self, case_ids):
+        case_info = []
+
+        for case_id in tqdm(case_ids):
+            case_info.append(self._get_case_content_by_id(case_id))
+
+        return case_info
+
     def _save_dataframe(self, case_info, drop_unused_columns=False):
         df = pd.DataFrame(
             case_info,
@@ -128,7 +166,9 @@ class QADataCrawler:
         if drop_unused_columns:
             df = df.drop(["case_title", "date_created", "date_answered"], axis=1)
 
-        df.to_csv("raw_qa_dataset.csv", index=False)
+        os.makedirs("data", exist_ok=True)
+        df.to_csv("./data/raw_qa_dataset.csv", index=False)
+        logger.info(f"\t\tGathered Data Count: {len(df)}")
 
     def _save_case_id_list(self, case_id_list, file_name="case_id_list.pkl"):
         with open(file_name, "wb") as f:
@@ -141,6 +181,8 @@ class QADataCrawler:
 
 
 if __name__ == "__main__":
+    logger = utilize_loggers(__file__)
+
     crawler = QADataCrawler()
     crawler.start_driver()
     crawler.get_data()
