@@ -7,11 +7,12 @@
 apt install curl 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
 source ~/.profile
-nvm install v16.15.1
-### Install Tailwind CSS
-npm install -D tailwindcss postcss autoprefixer 
-npx tailwindcss init
+nvm install 16.15.1
 
+### Install Tailwind CSS
+npm install -g yarn
+yarn add tailwindcss postcss autoprefixer 
+npx tailwindcss init
 ```
 
 설치가 끝나셨으면 아래 알맞은 버전이 설치되었는지 확인 부탁드립니다. 
