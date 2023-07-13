@@ -12,6 +12,7 @@ class Precedent(BaseModel):
     case_number: str
     case_type: str
     ref_article: str
+    url: str
 
 
 def search_precedent(q_a_sentence: str, model, text_data, vector_data):
@@ -30,8 +31,14 @@ def search_precedent(q_a_sentence: str, model, text_data, vector_data):
 
     for i, index in enumerate(top_question):
         if data_cosine[i] >= 0.5:
+            ref_article = text_data[index][7]
+            ref_article_split = str(ref_article).split()
+            if len(ref_article_split) >= 2:
+                url = f"https://law.go.kr/법령/{ref_article_split[0]}/{ref_article_split[1]}"
+            else:
+                url = ""
             precedent_list.append(
-                Precedent(case_name=text_data[index][3], case_number=text_data[index][0], case_type=text_data[index][6], ref_article=text_data[index][7])
+                Precedent(case_name=text_data[index][3], case_number=text_data[index][0], case_type=text_data[index][6], ref_article=ref_article, url=url)
             )
 
     print(f"search time: {time.time() - start_time}")

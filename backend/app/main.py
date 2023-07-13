@@ -34,7 +34,7 @@ def startup_event():
     global tokenizer, llm, search_model, text_data, vector_data
 
     print("Load LLM")
-    peft_model_id = "kfkas/LawBot-v1_koalpaca_legalQA_easylaw"
+    peft_model_id = "kfkas/LawBot-level1-2000iter"
     config = PeftConfig.from_pretrained(peft_model_id)
     llm = AutoModelForCausalLM.from_pretrained(
         config.base_model_name_or_path, device_map={"": 0}
@@ -46,9 +46,9 @@ def startup_event():
     search_model = SentenceTransformer("jhgan/ko-sroberta-multitask")
 
     print("Load data")
-    base_path = os.path.join(os.path.dirname(__file__))
+    base_path = os.path.abspath(os.path.dirname(__file__))
 
-    text_data = np.array(pd.read_csv(base_path + "/../data/law_data/law_data_drop.csv"))
+    text_data = np.array(pd.read_csv(base_path + "/../data/law_data/law_data.csv"))
     vector_data = load_vector_data(
         base_path + "/../data/law_data/law_data_drop_vector.bin"
     )
