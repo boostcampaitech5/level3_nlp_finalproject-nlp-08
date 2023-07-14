@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
+
   const [message, setMessage] = useState("");
-  const [sentMessage, setSentMessage] = useState({});
-  const [aianswer, setAianswer] = useState({})
+  const [sentMessage, setSentMessage] = useState("");
+  const [aianswer, setAianswer] = useState("")
 
   const messagehandler = async (e) => {
     e.preventDefault();
-    const response = await fetch('/genereate', {
+    const response = await fetch('/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ function App() {
       body: JSON.stringify({ q_sentence: message }),
     });
     const data = await response.json()
-    setSentMessage(message.q_sentence);
+    setSentMessage(message);
     setAianswer(data.answer)
     setMessage("");
   };
