@@ -11,7 +11,7 @@ function App() {
 
   const messagehandler = async (e) => {
     e.preventDefault();
-    const response = await fetch('/', {
+    const response = await fetch('/genereate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
