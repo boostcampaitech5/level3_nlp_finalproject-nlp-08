@@ -3,7 +3,9 @@ import pickle
 import time
 
 import numpy as np
+import torch
 from pydantic import BaseModel
+from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -16,9 +18,9 @@ class Precedent(BaseModel):
 
 
 def search_precedent(q_a_sentence: str, model, text_data, vector_data):
-    model.to("cuda:0")
-
     start_time = time.time()
+    model = SentenceTransformer("jhgan/ko-sroberta-multitask") #TODO
+    model.to("cuda:0")
 
     input_vector = model.encode(q_a_sentence)
     input_vecotr = np.expand_dims(input_vector, axis=0)
@@ -40,6 +42,9 @@ def search_precedent(q_a_sentence: str, model, text_data, vector_data):
             precedent_list.append(
                 Precedent(case_name=text_data[index][3], case_number=text_data[index][0], case_type=text_data[index][6], ref_article=ref_article, url=url)
             )
+
+    del model
+    torch.cuda.empty_cache()
 
     print(f"search time: {time.time() - start_time}")
 
