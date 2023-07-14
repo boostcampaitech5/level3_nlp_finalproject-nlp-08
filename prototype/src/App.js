@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [message, setMessage] = useState(String);
-  const [sentMessage, setSentMessage] = useState(String);
+  const [message, setMessage] = useState("");
+  const [sentMessage, setSentMessage] = useState({});
   const [aianswer, setAianswer] = useState({})
 
   const messagehandler = async (e) => {
@@ -16,10 +16,10 @@ function App() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ q_sentence: message }),
     });
     const data = await response.json()
-    setSentMessage(message);
+    setSentMessage(message.q_sentence);
     setAianswer(data.answer)
     setMessage("");
   };
@@ -43,7 +43,6 @@ function App() {
               <div class="flex flex-col h-full overflow-x-auto mb-4">
                 <div class="flex flex-col">
                   <div class="grid grid-cols-12 gap-y-2">
-
                     {sentMessage && (
                       <div class="col-start-6 col-end-13 p-3 rounded-lg">
                         <div class="flex items-center justify-start flex-row-reverse">
