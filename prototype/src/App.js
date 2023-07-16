@@ -1,33 +1,52 @@
 import Header from './components/Header';
 import ChattingSideBar from './components/ChattingSideBar';
 import SimilarPrecedent from './components/SimilarPrecedent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
-
 
   const [message, setMessage] = useState("");
   const [sentMessage, setSentMessage] = useState("");
   const [aianswer, setAianswer] = useState("")
+  const [precedents, setPrecedents] = useState([
+    {
+      "case_name": "",
+      "case_number": "",
+      "case_type": "",
+      "ref_article": "",
+      "url": "string"
+    },
+    {
+      "case_name": "",
+      "case_number": "",
+      "case_type": "",
+      "ref_article": "",
+      "url": "string"
+    },
+    {
+      "case_name": "",
+      "case_number": "",
+      "case_type": "",
+      "ref_article": "",
+      "url": ""
+    }
+  ])
 
   const messagehandler = async (e) => {
     e.preventDefault();
+    setMessage("");
+    setSentMessage(message);
     const response = await fetch('/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ q_sentence: message }),
+      body: JSON.stringify({ q_sentence: sentMessage }),
     });
     const data = await response.json()
-    setSentMessage(message);
-    setAianswer(data.answer)
-    setMessage("");
+    setAianswer(data.answer_sentence)
+    setPrecedents(data.similar_precedent)
   };
-
-  useEffect(() => {
-    messagehandler()
-  }, [])
 
   return (
     <div class="w-full overflow-x-hidden">
@@ -38,9 +57,7 @@ function App() {
             <ChattingSideBar />
           </div>
           <div class="flex flex-col flex-auto p-6">
-            <div
-              class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 p-4 mt-12"
-            >
+            <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 p-4 mt-12">
               <div class="flex flex-col h-full overflow-x-auto mb-4">
                 <div class="flex flex-col">
                   <div class="grid grid-cols-12 gap-y-2">
@@ -56,7 +73,21 @@ function App() {
                         </div>
                       </div>
                     )}
-
+                    {aianswer && (
+                      <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                        <div class="flex flex-row items-center">
+                          <div
+                            class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-300 flex-shrink-0"
+                          >
+                            L
+                          </div>
+                          <div
+                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                          >
+                            <div>{aianswer}</div>
+                          </div>
+                        </div>
+                      </div>)}
                   </div>
                 </div>
               </div>
@@ -84,7 +115,7 @@ function App() {
                   </button>
                 </div>
                 <div class="flex-grow ml-4">
-                  <form class="relative w-full">
+                  <form type="submit" class="relative w-full">
                     <input
                       type="text"
                       class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
@@ -141,7 +172,7 @@ function App() {
             </div>
           </div>
           <div class="flex flex-col py-8 w-64 bg-white flex-shrink-0">
-            <SimilarPrecedent />
+            <SimilarPrecedent precedents={precedents} />
           </div>
         </div>
       </div>
