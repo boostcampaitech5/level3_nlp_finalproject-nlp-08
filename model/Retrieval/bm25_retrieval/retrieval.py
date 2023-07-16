@@ -1,21 +1,9 @@
 import json
 import os
-import pickle
-import time
-from contextlib import contextmanager
 from typing import List, Optional, Tuple, Union
 import numpy as np
 import pandas as pd
 from rank_bm25 import BM25L, BM25Okapi, BM25Plus
-from sklearn.feature_extraction.text import TfidfVectorizer
-from tqdm.auto import tqdm
-
-
-@contextmanager
-def timer(name):
-    t0 = time.time()
-    yield
-    print(f"[{name}] done in {time.time() - t0:.3f} s")
 
 
 def setup_bm25(parent_class):
