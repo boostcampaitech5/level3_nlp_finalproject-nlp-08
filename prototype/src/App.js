@@ -35,6 +35,30 @@ function App() {
   const messagehandler = async (e) => {
     e.preventDefault();
     setMessage("");
+    setPrecedents([
+      {
+        "case_name": "",
+        "case_number": "",
+        "case_type": "",
+        "ref_article": "",
+        "url": "string"
+      },
+      {
+        "case_name": "",
+        "case_number": "",
+        "case_type": "",
+        "ref_article": "",
+        "url": "string"
+      },
+      {
+        "case_name": "",
+        "case_number": "",
+        "case_type": "",
+        "ref_article": "",
+        "url": ""
+      }
+    ])
+    setAianswer("")
     setSentMessage(message);
     const response = await fetch('/generate', {
       method: 'POST',
@@ -174,6 +198,7 @@ function App() {
           <div class="flex flex-col py-8 w-64 bg-white flex-shrink-0">
             <SimilarPrecedent precedents={precedents} />
           </div>
+
         </div>
       </div>
 
