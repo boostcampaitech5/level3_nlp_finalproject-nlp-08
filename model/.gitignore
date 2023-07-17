@@ -1,4 +1,5 @@
 LLM/train/data
+LLM/train/val_data
 ../.idea
 BERT/data
 Retrieval/bert_retrieval/data
