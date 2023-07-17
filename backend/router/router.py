@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from typing import List, Union
 
+import pytz
 import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -26,7 +27,8 @@ class Answer(BaseModel):
 
 @app.post("/generate", response_model=Union[Answer, None])
 async def generate(question: Question):
-    print(datetime.today().strftime("%Y/%m/%d %H:%M:%S"))
+    KST = pytz.timezone('Asia/Seoul')
+    print(datetime.today(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence.strip()
     if q_sentence == "":
         return None
