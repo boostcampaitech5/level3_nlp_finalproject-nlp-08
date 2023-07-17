@@ -2,4 +2,4 @@ LLM/train/data
 ../.idea
 BERT/data
 Retrieval/bert_retrieval/data
-
+Retrieval/bm25_retrieval/all_data
