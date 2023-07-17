@@ -58,12 +58,8 @@ function App() {
         "url": ""
       }
     ])
-    console.log(message)
-    console.log(sentMessage)
     setAianswer("")
     setSentMessage(message);
-    console.log(message)
-    console.log(sentMessage)
     const response = await fetch('/generate', {
       method: 'POST',
       headers: {
