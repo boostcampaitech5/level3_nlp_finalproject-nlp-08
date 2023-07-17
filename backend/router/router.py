@@ -1,5 +1,6 @@
 import json
-from typing import List
+from datetime import datetime
+from typing import List, Union
 
 import requests
 from fastapi import FastAPI
@@ -23,9 +24,12 @@ class Answer(BaseModel):
 #     # print(res)
 #     return HTMLResponse(content=res.text, status_code=200)
 
-@app.post("/generate", response_model=Answer)
+@app.post("/generate", response_model=Union[Answer, None])
 async def generate(question: Question):
-    q_sentence = question.q_sentence
+    print(datetime.today().strftime("%Y/%m/%d %H:%M:%S"))
+    q_sentence = question.q_sentence.strip()
+    if q_sentence == "":
+        return None
     headers = {"Content-Type": "application/json", "accept": "application/json"}
     url = "http://127.0.0.1:8000/generate"
     data = {"q_sentence": q_sentence}
