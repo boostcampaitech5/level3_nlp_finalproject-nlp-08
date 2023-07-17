@@ -3,3 +3,4 @@ __pycache__
 model
 test.ipynb
 data
+nohup.out
