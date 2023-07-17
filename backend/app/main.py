@@ -6,10 +6,10 @@ import pandas as pd
 from fastapi import FastAPI
 from peft import PeftConfig, PeftModel
 from pydantic import BaseModel
-from sentence_transformers import SentenceTransformer
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from generate import generate_answer
+from retrieval import infer
 from search import Precedent, load_vector_data, search_precedent
 
 
@@ -57,6 +57,7 @@ def startup_event():
 @app.post("/generate", response_model=Answer)
 async def generate(question: Question):
     q_sentence = question.q_sentence
+    retrieve_answer = infer(q_sentence=q_sentence)
     answer_sentence = generate_answer(q_sentence=q_sentence, model=llm, tokenizer=tokenizer)
-    similar_precedent = search_precedent(q_a_sentence=q_sentence+answer_sentence, model=search_model, text_data=text_data, vector_data=vector_data)
+    similar_precedent = search_precedent(q_a_sentence=q_sentence+retrieve_answer, model=search_model, text_data=text_data, vector_data=vector_data)
     return Answer(answer_sentence=answer_sentence, similar_precedent=similar_precedent)
