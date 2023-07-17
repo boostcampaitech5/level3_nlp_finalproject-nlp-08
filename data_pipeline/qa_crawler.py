@@ -1,13 +1,12 @@
-# 모듈화
 import os
-import pandas as pd
+from urllib.request import urlopen
 
+import pandas as pd
+from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
-from bs4 import BeautifulSoup as bs
-from urllib.request import urlopen
 
 
 class QALawCrawler:
@@ -38,7 +37,7 @@ class QALawCrawler:
         while end_point == 0:
             for j in range(2, 11):
                 for k in range(1, 11):
-                    # 상담 이동
+                    
                     try:
                         self._wait_driver_click(
                             f'//*[@id="content"]/div[2]/div/form/div[2]/table/tbody/tr[{k}]/td[2]/a'
@@ -47,7 +46,7 @@ class QALawCrawler:
                         self._wait_driver_click(f'//*[@id="content"]/div[2]/div/div/a')
                     except:
                         break
-                # 페이지 이동
+                
                 try:
                     self._wait_driver_click(
                         f'//*[@id="content"]/div[2]/div/form/div[3]/a[{j}]'
@@ -55,7 +54,7 @@ class QALawCrawler:
                 except:
                     end_point = 1
                     break
-            # 다음 페이지 이동
+            
             try:
                 self._wait_driver_click(
                     '//*[@id="content"]/div[2]/div/form/div[3]/button[3]'
