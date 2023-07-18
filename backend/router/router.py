@@ -24,7 +24,7 @@ def root():
 @app.post("/generate", response_model=Union[Answer, None])
 async def generate(question: Question):
     KST = pytz.timezone('Asia/Seoul')
-    print(datetime.today(KST).strftime("%Y/%m/%d %H:%M:%S"))
+    print(datetime.now(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence.strip()
     if q_sentence == "":
         print({"q_sentence": q_sentence})
