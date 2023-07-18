@@ -58,7 +58,7 @@ def startup_event():
 @app.post("/generate", response_model=Answer)
 async def generate(question: Question):
     KST = pytz.timezone('Asia/Seoul')
-    print(datetime.today(KST).strftime("%Y/%m/%d %H:%M:%S"))
+    print(datetime.now(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence
     print(q_sentence)
     answer_sentence = generate_answer(q_sentence=q_sentence, model=llm, tokenizer=tokenizer)
