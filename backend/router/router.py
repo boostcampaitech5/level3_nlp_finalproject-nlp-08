@@ -17,13 +17,9 @@ class Answer(BaseModel):
     similar_precedent: List
 
 
-# @app.get("/model_api", response_class=HTMLResponse)
-# def docs():
-#     url = "http://127.0.0.1:8000/docs"
-#     res = requests.get(url)
-
-#     # print(res)
-#     return HTMLResponse(content=res.text, status_code=200)
+@app.get("/")
+def root():
+    print("Hello World!")
 
 @app.post("/generate", response_model=Union[Answer, None])
 async def generate(question: Question):
