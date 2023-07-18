@@ -31,12 +31,13 @@ async def generate(question: Question):
     print(datetime.today(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence.strip()
     if q_sentence == "":
+        print({"q_sentence": q_sentence})
         return None
     headers = {"Content-Type": "application/json", "accept": "application/json"}
     url = "http://127.0.0.1:8000/generate"
     data = {"q_sentence": q_sentence}
+    
     print(data)
-
     res = requests.post(url, headers=headers, data=json.dumps(data))
     
     return res.json()
