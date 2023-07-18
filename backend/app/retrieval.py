@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from typing import Callable, List, Optional, Tuple, Union
 
 import numpy as np
@@ -10,6 +11,8 @@ from transformers import AutoTokenizer
 
 
 def infer(q_sentence):
+    start_time = time.time()
+
     BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     data_path = os.path.join(BASE_DIR, "data/all_data")
     data = Autodata(data_path)
@@ -19,6 +22,9 @@ def infer(q_sentence):
     datasets = run_sparse_retrieval(
         tokenize_fn=tokenizer.tokenize, data_path=data_path, datasets=q_sentence, bm25="plus"
     )
+
+    print(f"retrieve_question: {datasets[2][0]}")
+    print(f"retrieve time: {time.time() - start_time}")
 
     return datasets[3][0]
 
