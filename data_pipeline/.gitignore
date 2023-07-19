@@ -1,4 +1,5 @@
 local/*
 data/*
+artifact/*
 __pycache__
 *.log

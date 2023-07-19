@@ -7,7 +7,7 @@ def utilize_loggers(name):
     logger_name = os.path.splitext(os.path.basename(name))[0]
 
     logging.basicConfig(
-        filename=f"{logger_name}.log",
+        filename=f"./artifact/{logger_name}.log",
         format="%(asctime)s | %(levelname)s: %(message)s",
         level=logging.INFO,
         datefmt="%Y/%m/%d %I:%M:%S %p",
