@@ -7,19 +7,21 @@ def train():
     model_id = "nlpai-lab/kullm-polyglot-5.8b-v2"
     model, tokenizer = load_model(model_id)
     tokenizer.pad_token = tokenizer.eos_token
-    data = Autodata(data_folder="./data", tokenizer=tokenizer).tokenizer_dataset
-
+    train_data = Autodata(data_folder="./data", tokenizer=tokenizer).tokenizer_dataset
+    val_data = Autodata(data_folder="./val_data", tokenizer=tokenizer).tokenizer_dataset
     trainer = transformers.Trainer(
         model=model,
-        train_dataset=data,
+        train_dataset=train_data,
+        eval_dataset=val_data,
         args=transformers.TrainingArguments(
-            per_device_train_batch_size=4,
+            per_device_train_batch_size=16,
             gradient_accumulation_steps=1,
-            num_train_epochs=2,  ##
-            # max_steps=5,
-            learning_rate=1e-5,
+            num_train_epochs=6,
+            learning_rate=1e-4,
             fp16=True,
             logging_steps=10,
+            save_strategy="epoch",
+            evaluation_strategy="epoch",
             output_dir="./model_outputs",
             optim="paged_adamw_8bit",
         ),
@@ -32,8 +34,8 @@ def train():
     )
     trainer.train()
 
-    push_model_id = "kfkas/LawBot-v1_koalpaca_legalQA_easylaw_cro"
-    huggingface_write_token = "-"  # Huggingface Write Token 작성
+    push_model_id = "kfkas/LawBot-level2-5.8B_FIX"
+    huggingface_write_token = ""  # Huggingface Write Token 작성
 
     model.push_to_hub(
         push_model_id, use_temp_dir=True, use_auth_token=huggingface_write_token

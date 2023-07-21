@@ -27,9 +27,9 @@ def LLM_infer(input):
     peft_model_id = "kfkas/LawBot-v1_koalpaca_legalQA_easylaw"
     config = PeftConfig.from_pretrained(peft_model_id)
     model = AutoModelForCausalLM.from_pretrained(
-        config.base_model_name_or_path, device_map={"": 0}
+        config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
     )
-    model = PeftModel.from_pretrained(model, peft_model_id)
+    model = PeftModel.from_pretrained(model, peft_model_id, torch_dtype=torch.float16)
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 
     model.eval()
