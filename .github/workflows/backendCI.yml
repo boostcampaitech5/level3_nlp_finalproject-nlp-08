@@ -5,12 +5,10 @@ name: CI for backend
 
 on:
   push:
-    paths:
-      - "backend"
+    paths: "backend/**"
     branches: [ "develop" ]
   pull_request:
-    paths:
-      - "backend"
+    paths: "backend/**"
     branches: [ "develop" ]
 
 jobs:
