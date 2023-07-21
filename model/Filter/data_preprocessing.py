@@ -1,7 +1,8 @@
 import pandas as pd
 from datasets import concatenate_datasets, Dataset, load_dataset
 import os
-import torch
+
+
 class Autodata:
     def __init__(self, data_folder="./data"):
         self.data_foloder = data_folder
@@ -14,7 +15,7 @@ class Autodata:
             if file_name.endswith(".csv"):
                 file_path = os.path.join(data_foloder, file_name)
                 dataset = pd.read_csv(file_path)
-                dataframe = dataset[["question",'answer']]
+                dataframe = dataset[["question", "answer"]]
                 pd_datasets.append(dataframe)
                 dataset = Dataset.from_pandas(dataframe)
                 datasets.append(dataset)
@@ -23,17 +24,18 @@ class Autodata:
 
         return combined_dataset
 
-    def load_instruction_dataset(self,dataset_id):
+    def load_instruction_dataset(self, dataset_id):
         koalpaca_data = load_dataset(dataset_id)
-        data = koalpaca_data['train']
-        data = data.rename_column('instruction','question')
-        question = data['question']
+        data = koalpaca_data["train"]
+        data = data.rename_column("instruction", "question")
+        question = data["question"]
         return question
+
     def label_indexing(self, data, state):
         if state == 1:
             answer = 1
         else:
             answer = 0
-        answer_list = [answer]*len(data)
+        answer_list = [answer] * len(data)
 
-        return Dataset.from_dict({'question':data, 'target':answer_list})
+        return Dataset.from_dict({"question": data, "target": answer_list})

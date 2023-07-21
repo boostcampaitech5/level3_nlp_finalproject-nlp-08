@@ -28,30 +28,30 @@ class CustomDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         if self.state == "test":
-            return {"input_ids": torch.tensor(self.inputs[idx],dtype= torch.long)}
+            return {"input_ids": torch.tensor(self.inputs[idx], dtype=torch.long)}
         else:
             return {
-                    "input_ids": torch.tensor(self.inputs[idx],dtype=torch.long),
-                    "labels": torch.tensor(self.targets[idx],dtype= torch.long),
-                }
+                "input_ids": torch.tensor(self.inputs[idx], dtype=torch.long),
+                "labels": torch.tensor(self.targets[idx], dtype=torch.long),
+            }
 
     def __len__(self):
         return len(self.inputs)
 
     def tokenizing(self, dataframe: pd.DataFrame) -> list:
-        '''
-        토크나이징 
+        """
+        토크나이징
             Args :
                 dataframe (DataFrame): 토크나이징할 데이터
             Return :
                 data (list) : 학습할 문장 토큰 리스트
-        '''
+        """
         data = []
         for item in tqdm(
-            dataframe['question'], desc="Tokenizing", total=len(dataframe['question'])
+            dataframe["question"], desc="Tokenizing", total=len(dataframe["question"])
         ):
             text = item
-            #text = [item for text_column in self.text_columns]
+            # text = [item for text_column in self.text_columns]
             outputs = self.tokenizer(
                 text,
                 add_special_tokens=True,
@@ -62,7 +62,7 @@ class CustomDataset(torch.utils.data.Dataset):
             data.append(outputs["input_ids"])
         return data
 
-    def preprocessing(self, data) :
+    def preprocessing(self, data):
         inputs = self.tokenizing(data)
         if self.state == "test":
             return inputs
