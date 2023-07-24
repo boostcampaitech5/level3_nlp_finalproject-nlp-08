@@ -1,8 +1,11 @@
 import os
+from datetime import datetime
 from typing import List
 
 import numpy as np
 import pandas as pd
+import pytz
+import torch
 from fastapi import FastAPI
 from peft import PeftConfig, PeftModel
 from pydantic import BaseModel
@@ -21,7 +24,6 @@ class Answer(BaseModel):
     similar_precedent: List[Precedent]
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
 app = FastAPI()
 
 llm = None
@@ -35,12 +37,12 @@ def startup_event():
     global tokenizer, llm, search_model, text_data, vector_data
 
     print("Load LLM")
-    peft_model_id = "kfkas/LawBot-level1"
+    peft_model_id = "uomnf97/LawBot-level1-preprocessed"
     config = PeftConfig.from_pretrained(peft_model_id)
     llm = AutoModelForCausalLM.from_pretrained(
-        config.base_model_name_or_path, device_map={"": 0}
+        config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
     )
-    llm = PeftModel.from_pretrained(llm, peft_model_id)
+    llm = PeftModel.from_pretrained(llm, peft_model_id, torch_dtype=torch.float16)
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 
     print("Load search model")
@@ -57,7 +59,10 @@ def startup_event():
 
 @app.post("/generate", response_model=Answer)
 async def generate(question: Question):
+    KST = pytz.timezone('Asia/Seoul')
+    print(datetime.now(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence
+    print(f"q_sentence: {q_sentence}")
     retrieve_answer = infer(q_sentence=q_sentence)
     print(f"retrieve_answer: {retrieve_answer}")
     answer_sentence = generate_answer(q_sentence=q_sentence, model=llm, tokenizer=tokenizer)
