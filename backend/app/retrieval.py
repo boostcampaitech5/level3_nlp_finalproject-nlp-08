@@ -23,8 +23,8 @@ def infer(q_sentence):
         tokenize_fn=tokenizer.tokenize, data_path=data_path, datasets=q_sentence, bm25="plus"
     )
 
-    print(f"retrieve_question: {datasets[2][0]}")
     print(f"retrieve time: {time.time() - start_time}")
+    print(f"retrieve_question: {datasets[2][0]}")
 
     return datasets[3][0]
 
