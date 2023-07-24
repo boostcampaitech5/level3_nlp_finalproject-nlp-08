@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from generate import generate_answer
+from retrieval import infer
 from search import Precedent, load_vector_data, search_precedent
 
 
@@ -22,6 +23,7 @@ class Answer(BaseModel):
     answer_sentence: str
     similar_precedent: List[Precedent]
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 app = FastAPI()
 
 llm = None
@@ -60,7 +62,9 @@ async def generate(question: Question):
     KST = pytz.timezone('Asia/Seoul')
     print(datetime.now(KST).strftime("%Y/%m/%d %H:%M:%S"))
     q_sentence = question.q_sentence
-    print(q_sentence)
+    print(f"q_sentence: {q_sentence}")
+    retrieve_answer = infer(q_sentence=q_sentence)
+    print(f"retrieve_answer: {retrieve_answer}")
     answer_sentence = generate_answer(q_sentence=q_sentence, model=llm, tokenizer=tokenizer)
-    similar_precedent = search_precedent(q_a_sentence=q_sentence+answer_sentence, model=search_model, text_data=text_data, vector_data=vector_data)
+    similar_precedent = search_precedent(q_a_sentence=q_sentence+retrieve_answer, model=search_model, text_data=text_data, vector_data=vector_data)
     return Answer(answer_sentence=answer_sentence, similar_precedent=similar_precedent)
