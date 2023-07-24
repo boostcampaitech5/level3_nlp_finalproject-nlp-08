@@ -10,7 +10,7 @@ from rank_bm25 import BM25L, BM25Okapi, BM25Plus
 from transformers import AutoTokenizer
 
 
-def infer(q_sentence):
+def retrieve_QA(q_sentence):
     start_time = time.time()
 
     BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
