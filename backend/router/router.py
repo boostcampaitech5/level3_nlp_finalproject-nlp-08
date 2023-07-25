@@ -13,8 +13,8 @@ class Question(BaseModel):
     q_sentence: str
 
 class Answer(BaseModel):
-    answer_sentence: str
-    similar_precedent: List
+    answer_sentence: Union[str, None]
+    similar_precedent: Union[List, None]
 
 
 @app.get("/")
