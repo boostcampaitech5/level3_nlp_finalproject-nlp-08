@@ -9,6 +9,7 @@ import torch
 from fastapi import FastAPI
 from peft import PeftConfig, PeftModel
 from pydantic import BaseModel
+from sentence_transformers import SentenceTransformer
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from filter import is_legal_question
@@ -47,7 +48,7 @@ def startup_event():
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 
     print("Load search model")
-    # search_model = SentenceTransformer("jhgan/ko-sroberta-multitask")
+    search_model = SentenceTransformer("jhgan/ko-sroberta-multitask")
 
     print("Load data")
     base_path = os.path.abspath(os.path.dirname(__file__))

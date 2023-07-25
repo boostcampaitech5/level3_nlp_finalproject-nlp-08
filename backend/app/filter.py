@@ -1,8 +1,11 @@
+import time
+
 import torch.nn.functional as F
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 def is_legal_question(q_sentence):
+    start_time = time.time()
     base_model_name = "monologg/koelectra-small-v3-discriminator"
     model = AutoModelForSequenceClassification.from_pretrained(
         "kfkas/legal-question-filter-koelectra",
@@ -18,6 +21,8 @@ def is_legal_question(q_sentence):
     # print(logits)
     # print(pr)
     # print(int(arg))
+
+    print(f"filter time: {time.time() - start_time}")
     
     if pr[0][0] >= 0.98:
         return True
