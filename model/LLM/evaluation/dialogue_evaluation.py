@@ -17,7 +17,7 @@ class LawyerEvaluation:
         self.answer = False
 
     def generate_answer(self):
-        answer_list = [0]*20
+        answer_list = []
         
         device = (
             torch.device("cuda:0") if torch.cuda.is_available(
