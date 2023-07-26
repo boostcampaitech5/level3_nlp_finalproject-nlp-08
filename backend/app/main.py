@@ -39,7 +39,7 @@ def startup_event():
     global tokenizer, llm, search_model, text_data, vector_data
 
     print("Load LLM")
-    peft_model_id = "uomnf97/LawBot-level1-preprocessed"
+    peft_model_id = "YoonSeul/LawBot-level-3-1epoch"
     config = PeftConfig.from_pretrained(peft_model_id)
     llm = AutoModelForCausalLM.from_pretrained(
         config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
@@ -53,7 +53,7 @@ def startup_event():
     print("Load data")
     base_path = os.path.abspath(os.path.dirname(__file__))
 
-    text_data = np.array(pd.read_csv(base_path + "/../data/law_data/law_data.csv"))
+    text_data = np.array(pd.read_csv(base_path + "/../data/law_data/law_data_drop.csv"))
     vector_data = load_vector_data(
         base_path + "/../data/law_data/law_data_drop_vector.bin"
     )
