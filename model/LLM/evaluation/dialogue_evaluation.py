@@ -41,8 +41,6 @@ class LawyerEvaluation:
         tokenizer.pad_token = tokenizer.eos_token
 
         for i in tqdm(range(len(self.data)), desc="processing evaluation data"):
-            if i == 0 : 
-                break
             data = self.data.iloc[i]["question"]
             answer_list.append(infer.gen(data, model=model,
                            tokenizer=tokenizer, device=device))
