@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from app.retrieval import retrieve_QA
+from app.bm25_retrieval import retrieve_QA
 
 
 def test_retrieve_QA():

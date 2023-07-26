@@ -45,16 +45,16 @@ def remove_footer(raw_text: str) -> str:
 
 def remove_link(raw_text: str) -> str:
     pattern = (
-        '\(?[:/\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+[/\da-zA-Z?=%@.&]+\s?\)?'
+        '\(?[:/a-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+[/\da-zA-Z?=%@.&]+\s?\)?'
     )
     processed_text = re.sub(pattern, "", raw_text)
     pattern = (
-        '\(?[:/\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+\s?\)?'
+        '\(?[:/a-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+\s?\)?'
     )
     processed_text = re.sub(pattern, "", processed_text)
 
     pattern = (
-    '\(?[:/\da-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+\)?|'
+    '\(?[:/a-zA-Z]+.\s?[\da-zA-Z]+.\s?[\da-zA-Z]+\)?|'
     )
     processed_text = re.sub(pattern, "", processed_text)
     return processed_text
