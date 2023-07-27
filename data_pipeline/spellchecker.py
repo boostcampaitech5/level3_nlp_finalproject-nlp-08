@@ -37,7 +37,7 @@ def spell_check(txt, delay = 15):
     return clean_txt
 
 
-dt = pd.read_csv('preprocessed_qa_spacing_pre_word.csv')
+dt = pd.read_csv('./data/preprocessed_qa_spacing_pre_word.csv')
 new_q = []
 new_a = []
 options = set_options()
@@ -69,4 +69,4 @@ driver.quit()
 
 clean_data = pd.DataFrame({'question' : new_q, 'answer' :new_a})
 
-clean_data.to_csv('preprocessed_qa_spacing_spell.csv', index=False)
+clean_data.to_csv('./data/preprocessed_qa_spacing_spell.csv', index=False)
