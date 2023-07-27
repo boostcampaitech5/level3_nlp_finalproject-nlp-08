@@ -5,9 +5,9 @@ from datasets import load_dataset
 from dotenv import load_dotenv
 
 load_dotenv()
+huggingface_read_token = os.getenv("HUGGINGFACE_READ_TOKEN")
 
 def load_train_data():
-    huggingface_read_token = "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"
     data = load_dataset("YoonSeul/legal-GPT-BARD-train_v3", use_auth_token=huggingface_read_token)
     df = pd.DataFrame(data)
 
@@ -30,7 +30,6 @@ def load_train_data():
     train_df.to_csv(SAVE_PATH)
 
 def load_eval_data():
-    huggingface_read_token = os.getenv("HUGGINGFACE_READ_TOKEN")
     data = load_dataset("YoonSeul/legal-GPT-BARD-val_v3", use_auth_token=huggingface_read_token)
     df = pd.DataFrame(data)
 

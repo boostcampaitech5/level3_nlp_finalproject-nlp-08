@@ -8,12 +8,12 @@ from airflow.operators.python import PythonOperator
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from module.load_data import load_train_eval_data
-from module.train.train_model import train_model
+from module.train_model import train_model
 
 with DAG(
     dag_id="training_pipeline",
     description="train the model periodically",
-    start_date=datetime.datetime(2023,07,27),
+    start_date=datetime.datetime(2023,7,27),
     schedule_interval="0 0 * * 5",
     tags=["LLM"],
 ) as dag:

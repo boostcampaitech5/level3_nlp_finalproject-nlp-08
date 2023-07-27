@@ -7,9 +7,11 @@ pytest==7.4.0
 pandas==2.0.3
 scikit-learn==1.3.0
 sentence-transformers==2.2.2
-peft==0.3.0
+git+https://github.com/huggingface/peft.git
 rank-bm25==0.2.2
 datasets==2.13.1
 apache-airflow==2.2.3
 MarkupSafe==2.0.1
 python-dotenv==1.0.0
+bitsandbytes==0.41.0
+dnspython==2.3.0

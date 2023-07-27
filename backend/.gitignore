@@ -9,3 +9,4 @@ airflow.cfg
 airflow.db
 webserver_config.py
 .env
+airflow-webserver.pid
