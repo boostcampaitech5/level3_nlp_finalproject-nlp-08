@@ -27,7 +27,7 @@ with DAG(
         retry_delay=datetime.timedelta(minutes=5)
     )
 
-    train_model = PythonOperator(
+    training_model = PythonOperator(
         task_id="train_model",
         python_callable=train_model,
         depends_on_past=True,
@@ -35,3 +35,5 @@ with DAG(
         retries=3,
         retry_delay=datetime.timedelta(minutes=5)
     )
+
+    load_data >> training_model
