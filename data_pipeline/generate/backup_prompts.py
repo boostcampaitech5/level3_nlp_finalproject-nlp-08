@@ -1,33 +1,5 @@
-import os
-import time
+import pickle
 
-import openai
-import pandas as pd
-from tqdm.auto import tqdm
-
-openai.api_key = os.environ["OPENAI_API_KEY"]
-
-def get_response(prompt, model="gpt-3.5-turbo", temperature=1.0, max_tokens=1000):
-    messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=temperature,
-        max_tokens=max_tokens
-    )
-    return response
-
-
-def get_price_of_inference(model, input_tokens, output_tokens):
-    if model == "gpt-3.5-turbo-0613":
-        input_price_per_k = 0.0015
-        output_price_per_k = 0.002
-        price_dollar = (input_tokens * input_price_per_k + output_tokens * output_price_per_k) / 1000
-        price_won = round(price_dollar * 1281.61, 5)
-        return [price_dollar, price_won]
-    else:
-        return None
-    
 prompts = {
     "zeroshot": "임의의 법률 분쟁 상황을 가정하고, 그에 대한 내용을 질문의 형식으로 만들어주세요. 그리고 해당 질문에 대한 답변을 함께 출력해주세요.",
     "zeroshot2": "법률 분쟁 상황을 가정하고, 해당 상황의 가해자 또는 피해자가 의뢰할 만한 상담 내용을 작성해주세요. 출력에는 해당 상담 내용에 대한 답변을 포함해주세요.",
@@ -72,47 +44,7 @@ prompts = {
 """,
 }
 
-    
-full_responses = {}
-data = []
-num_data = 1000
-prompt_type = "fewshot"
-prompt = prompts["fewshot"]
 
-for i in tqdm(range(num_data)):
-    try:
-        response = get_response(prompt)
-    except:
-        time.sleep(5)
-        continue
-    full_responses[prompt_type] = response
-    output = response.choices[0].message.content # GPT output
-    model = response.model # Model used
-    input_tokens = response.usage.prompt_tokens # Number of tokens of input
-    output_tokens = response.usage.completion_tokens # Number of tokens of output
-    data.append(
-        [
-            prompt_type,
-            prompt,
-            output,
-            model,
-            input_tokens,
-            output_tokens,
-            *get_price_of_inference(model, input_tokens, output_tokens)
-        ],
-    )
-
-generated_df = pd.DataFrame(
-    data,
-    columns=[
-        "prompt_type",
-        "prompt",
-        "output",
-        "model",
-        "input_tokens",
-        "output_tokens",
-        "price_dollar",
-        "price_won"
-    ])
-
-generated_df.to_csv(f"./data/generated_data/generated_raw_data_{len(generated_df)}.csv", index=False)
+if __name__ == "__main__":
+    with open("prompts.pkl", "wb") as f:
+        pickle.dump(prompts, f)
