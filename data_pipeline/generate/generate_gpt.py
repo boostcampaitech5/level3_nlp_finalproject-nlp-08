@@ -75,4 +75,5 @@ generated_df = pd.DataFrame(
         "price_won"
     ])
 
-generated_df.to_csv(f"./data/generated_data/generated_raw_data_{len(generated_df)}.csv", index=False)
+os.makedirs("../data/generated_data/gpt", exist_ok=True)
+generated_df.to_csv(f"./data/generated_data/gpt/generated_data_gpt_{len(generated_df)}.csv", index=False)
