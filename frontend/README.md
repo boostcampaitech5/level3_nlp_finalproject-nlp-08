@@ -1,29 +1,32 @@
-# Requirements for Web Prototype
+# LawBot - Model
 
-아래는 웹 프로토타입 실행을 위한 의존성 패키지 설치 명령어 입니다. 
-순서대로 다운로드를 받아주세요.
+## ⚠️ Requirements for Web Prototype
+
+Below is the commands for installing dependency packages to run web prototype. <br/>
+Run the following commands in proper order.
 ```bash
-### install react
+# install react
 apt install curl 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-source ~/.profile
+source ~/.bashr
 nvm install 18.04.0
 
-### Install Tailwind CSS
+# Install Tailwind CSS
 npm install -g yarn
 yarn add tailwindcss postcss autoprefixer 
 npx tailwindcss init
 ```
 
-설치가 끝나셨으면 아래 알맞은 버전이 설치되었는지 확인 부탁드립니다. 
-실행 파일은 protoype안에 있는 readme파일을 참고해주세요.
+When installation is completed, please run the following commands to check if proper version is installed. <br/>
+Please refer to the README file inside the `prototype` directory for the executable file.
+
 ```bash
-node -v # v18.04.1가 나와야 합니다. 
-npm -v # v8.11.0가 나와야 합니다. 
+node -v # v18.04.1
+npm -v # v8.11.0 
 ```
 
-# Getting Started with Create React App
+## 💻 Getting Started with Create React App
 
 ```bash
-yarn start # npm run start
+yarn start # npm start
 ```
