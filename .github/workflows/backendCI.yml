@@ -15,7 +15,7 @@ jobs:
   CI:
     runs-on: self-hosted
     env:
-      working-directory: ~/level3_nlp_finalproject-nlp-08
+      working-directory: /opt/ml/level3_nlp_finalproject-nlp-08
 
     steps:
     - name: Update Code
