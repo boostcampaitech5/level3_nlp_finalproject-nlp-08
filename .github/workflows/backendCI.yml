@@ -24,7 +24,7 @@ jobs:
       
     - name: install dependencies
       run: |
-        source github_actions/bin/activate
+        source final_project/bin/activate
         pip install -r requirements.txt
       working-directory: "${{ env.working-directory }}/backend"
       
