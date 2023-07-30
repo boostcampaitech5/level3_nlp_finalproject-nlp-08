@@ -1,10 +1,11 @@
 import Header from './components/Header';
+import Loader from './components/Loader';
 import ChattingSideBar from './components/ChattingSideBar';
 import SimilarPrecedent from './components/SimilarPrecedent';
 import { useState } from 'react';
 
 function App() {
-
+  const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("");
   const [sentMessage, setSentMessage] = useState("");
   const [aianswer, setAianswer] = useState("");
@@ -12,6 +13,7 @@ function App() {
 
   const messagehandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setMessage("")
     setSentMessage(message)
     setAianswer("")
@@ -38,6 +40,7 @@ function App() {
         setPrecedents(data.similar_precedent);
       }
     }
+    setLoading(false)
   };
 
   return (
@@ -80,7 +83,7 @@ function App() {
                           </div>
                         </div>
                       </div>)}
-                      
+                      {!aianswer && loading && (<Loader />)}
                   </div>
                 </div>
               </div>
