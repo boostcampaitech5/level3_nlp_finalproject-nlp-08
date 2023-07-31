@@ -191,8 +191,7 @@
 
 - 노션 :
   - Kanban Board를 이용하여 체계적으로 To do List 관리
-  - 노션 협업기구를 활용해 회의 및 기록 체계화
-<img width="1579" alt="Screenshot 2023-07-31 at 12 38 10 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/ecc791e2-6001-44c1-bdc1-3fb3d4c61f39">
+  - 노션 협업기구를 활용해 회의 및 기록 체계화å<img width="1579" alt="Screenshot 2023-07-31 at 12 38 10 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/ecc791e2-6001-44c1-bdc1-3fb3d4c61f39">
 
 - GitHub : 
   - Github Flow를 이용하여 브랜치 전략 수립
