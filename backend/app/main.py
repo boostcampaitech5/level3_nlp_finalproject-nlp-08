@@ -43,7 +43,7 @@ def startup_event():
     global tokenizer, llm, search_model, retrieve_model, retrieve_data, retrieve_vector_data, text_data, vector_data
 
     print("Load LLM")
-    peft_model_id = "YoonSeul/LawBot-level-3-1epoch"
+    peft_model_id = "YoonSeul/LawBot-level-3-KuLLM-5.8B-tae-2epoch"
     config = PeftConfig.from_pretrained(peft_model_id)
     llm = AutoModelForCausalLM.from_pretrained(
         config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
