@@ -195,9 +195,8 @@
 
 - GitHub : 
   - Github Flow를 이용하여 브랜치 전략 수립
-  - PR Template, Issue Template을 이용하여 체계젹으로 관리하였습니다.
-  - Ground Rule을 정해 모두 일관된 Commit convention을 유지
-  <img width="1422" alt="Screenshot 2023-07-31 at 12 38 50 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/2fdfce62-6c07-4e36-8312-1588e5204653">
+  - PR Template, Issue Template을 이용하여 체계젹으로 관리.
+  - Ground Rule을 정해 모두 일관된 Commit convention을 유지<img width="1422" alt="Screenshot 2023-07-31 at 12 38 50 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/2fdfce62-6c07-4e36-8312-1588e5204653">
 
 
 ### Links : 
