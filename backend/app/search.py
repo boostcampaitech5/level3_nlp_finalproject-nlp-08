@@ -19,7 +19,7 @@ class Precedent(BaseModel):
 
 def search_precedent(q_a_sentence: str, model, text_data, vector_data):
     start_time = time.time()
-    model = SentenceTransformer("jhgan/ko-sroberta-multitask") #TODO
+    # model = SentenceTransformer("jhgan/ko-sroberta-multitask") #TODO
     model.to("cuda:0")
 
     input_vector = model.encode(q_a_sentence)
@@ -43,8 +43,8 @@ def search_precedent(q_a_sentence: str, model, text_data, vector_data):
                 Precedent(case_name=text_data[index][3], case_number=text_data[index][0], case_type=text_data[index][6], ref_article=ref_article, url=url)
             )
 
-    del model
-    torch.cuda.empty_cache()
+    # del model
+    # torch.cuda.empty_cache()
 
     print(f"search time: {time.time() - start_time}")
 
