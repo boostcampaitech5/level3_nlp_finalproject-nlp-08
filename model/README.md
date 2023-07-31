@@ -1,7 +1,6 @@
 # LawBot - Model
 
 ## 💻 Getting Started
-<img src=https://github.com/taemin6697/Paper_Review/assets/96530685/9f94505c-4fda-41ae-9a67-1e4c96c501cc style="max-width: 200px; width: 100%" />
 
 ## ⚠️ How To install Requirements
 ### Cuda install
