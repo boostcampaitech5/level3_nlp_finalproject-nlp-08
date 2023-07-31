@@ -11,6 +11,8 @@
 
 **※ 본 웹 서비스는 8월 말까지 계속 배포예정이며, 추가적인 서비스 고도화 및 성능 개선 작업이 이루어질 예정입니다..**
 
+<br>
+
 ## Projects BackGround
 
 ### 기획 의도 및 기대효과 
@@ -39,15 +41,18 @@
 >4. 우측 사이드바에서 사용자가 입력한 상황과 비슷한 최대 3가지의 유사 판례 제공
 >5. 링크를 통해 법률 정보를 직접 확인 가능 
 
+<br>
+
+
 ## 🧑🏻‍💻 Team Introduction & Members 
 
 > Team name : 윤슬 [ NLP 08조 ] 
-## 팀 소개
+### 팀 소개
 **조화와 지속 가능한 성장을 추구하는 `팀 윤슬`입니다!**
 
 **팀 개개인 모두 주어진 위치에 상관없이 모든 일에 `오너십`을 가지고 `적극적으로 참여`하는 것을 최우선으로 생각하였습니다. 좋은 동료가 되기 위해 치열하게 고민하고, 학습하고, 성장하고 있습니다.**
 
-## 👨🏼‍💻 Members
+### 👨🏼‍💻 Members
 강민재|김주원|김태민|신혁준|윤상원|
 :-:|:-:|:-:|:-:|:-:
 <img src='https://avatars.githubusercontent.com/u/39152134?v=4' height=130 width=130></img>|<img src='https://avatars.githubusercontent.com/u/81630351?v=4' height=130 width=130></img>|<img src='https://avatars.githubusercontent.com/u/96530685?v=4' height=130 width=130></img>|<img src='https://avatars.githubusercontent.com/u/96534680?v=4' height=130 width=130></img>|<img src='https://avatars.githubusercontent.com/u/38793142?v=4' height=130 width=130></img>|
@@ -62,11 +67,14 @@
 
 <img width="1589" alt="Screenshot 2023-07-31 at 11 54 44 AM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/d1ba5cf2-45a6-4c23-8816-83bc318f6df0">
 
+<br>
 
 ## ⌘ 서비스 Archiecture
 <img width="1653" alt="Screenshot 2023-07-31 at 12 03 17 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/5102884e-3c6f-44b8-b606-0af61dcd497e">
 
 >네이버 커넥트 재단으로부터 제공받은 V100 서버 4대를 모두 활용하기 위해 첫 설계 때부터 **서비스 확장이 쉬운 마이크로 서비스 아키텍처**를 고려했습니다. 또한 서비스 간의 상호 의존도를 낮춰 서버에 장애가 발생할 경우 전체 서비스가 중단되는 것을 방지하고자 하여 위와 같이 웹 서버, 모델 서버를 독립적으로 분리하고 API를 통해 서로 통신하는 구조로 설계했습니다. 이를 통해 한 대의 V100 서버에 장애가 발생하더라도 나머지 서비스는 전혀 영향을 받지 않고 서비스를 제공할 수 있습니다.
+
+<br>
 
 - 아래는 구현한 내용이고 관련된 내용을 확인하실 수 있는 링크입니다. 각 링크에서 왜 해당 기능을 구현을 했으며, 어떤 것들을 중점적으로 고려했는지 살펴보실 수 있습니다. 
 
@@ -74,6 +82,8 @@
   - ✍🏻 [로드 밸런싱 적용](https://uomnf97.notion.site/96f697aab756407aadbe51582a0a68d4?pvs=4)
   - ✍🏻 [Airflow를 이용한 모델 학습 파이프라인](https://uomnf97.notion.site/64a55c1e1f4a4ff985343a97b224a101?pvs=4)
   - 🛠️ [Auto Scaling을 통한 Failover](https://uomnf97.notion.site/Auto-Scaling-Failover-fa0ab424dcda44739ababe1eb719a106?pvs=4)
+
+<br>
 
 ## 💿 데이터
 <img width="1208" alt="Screenshot 2023-07-31 at 12 30 46 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/e9b220b5-ba51-489f-aa5e-c6c98cfd3eff">
@@ -83,6 +93,8 @@
 
 <img width="1552" alt="Screenshot 2023-07-31 at 12 31 04 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/05c47fc3-e2ff-4997-9396-effcbf966a7b">
 - 데이터 파이프라인을 도식화한 순환 DMOps 구조도는 위와 같습니다. 
+
+<br>
 
 >**법률 QA 데이터**
 
@@ -108,6 +120,7 @@
   - 📈[EDA 및 전처리](https://uomnf97.notion.site/EDA-b53d75aaa7574ea586cbd6cdbd5c755a?pvs=4)
   - 🛠️[생성모델을 통한 데이터 증강](https://uomnf97.notion.site/5e8e9ecc27694d7497fbad68f72136c0?pvs=4)
 
+<br>
 
 ## 📊 모델
 
