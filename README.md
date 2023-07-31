@@ -154,7 +154,7 @@
 - LLM 모델은 명확한 평가지표가 없어 직접 평가지표를 만들어 평가했습니다. 평가지표를 만들 때 고려했던 부분은 도메인 특성상 법률적인 정확도가 중요하므로 법률적인 정확도와 언어의 자연스러움 두가지 모두 평가할 수 있도록 metric을 제작하여 평가했습니다. 
 
 **[ Dialogue Evaluation Metric ]**
-- Kullm 모델의 Dialogue Evaluation Metric 평가요소를 도메인에 맞게 변형하여 활용하였고, 해당 지표를 직접 변호사에게 의뢰하여 답변을 평가했습니다. 추가로 모든 모델들은 모델 A, B, C ... 등 모델 이름을 가리고 블라인드 평가를 진행했므여, 명확한 평가지표를 만들기 위해 ChatGPT, BARD 모델과 함께 평가를 진행하였습니다. 최종적으로 저희가 구축한 **kfkas/legal-llama-2-ko-7b-Chat** 모델이 가장 좋은 성능을 보였습니다. 
+- Kullm 모델의 Dialogue Evaluation Metric 평가요소를 도메인에 맞게 변형하여 활용하였고, 해당 지표를 직접 변호사에게 의뢰하여 답변을 평가했습니다. 추가로 모든 모델들은 모델 A, B, C ... 등 모델 이름을 가리고 블라인드 평가를 진행했으며, 명확한 평가지표를 만들기 위해 ChatGPT, BARD 모델과 함께 평가를 진행하였습니다. 최종적으로 저희가 구축한 **kfkas/legal-llama-2-ko-7b-Chat** 모델이 가장 좋은 성능을 보였습니다. 
 
 <img width="1584" alt="Screenshot 2023-07-31 at 12 56 06 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/9cc5938c-2559-42ac-a478-78554a5befc6">
 
