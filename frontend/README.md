@@ -1,29 +1,60 @@
-# Requirements for Web Prototype
+# LawBot - Frontend
 
-아래는 웹 프로토타입 실행을 위한 의존성 패키지 설치 명령어 입니다. 
-순서대로 다운로드를 받아주세요.
+## ⚠️ Requirements for Web Frontend
+
+Below is the commands for installing dependency packages to run web prototype. <br/>
+Run the following commands in proper order.
 ```bash
-### install react
+# install react
 apt install curl 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-source ~/.profile
+source ~/.bashr
 nvm install 18.04.0
 
-### Install Tailwind CSS
+# Install Tailwind CSS
 npm install -g yarn
 yarn add tailwindcss postcss autoprefixer 
 npx tailwindcss init
 ```
 
-설치가 끝나셨으면 아래 알맞은 버전이 설치되었는지 확인 부탁드립니다. 
-실행 파일은 protoype안에 있는 readme파일을 참고해주세요.
-```bash
-node -v # v18.04.1가 나와야 합니다. 
-npm -v # v8.11.0가 나와야 합니다. 
-```
-
-# Getting Started with Create React App
+When installation is completed, please run the following commands to check if proper version is installed. <br/>
+Please refer to the README file inside the `frontend` directory for the executable file.
 
 ```bash
-yarn start # npm run start
+node -v # v18.04.1
+npm -v # v8.11.0 
 ```
+
+## 💻 Getting Started with Create React App 
+
+```bash
+yarn start # npm start
+```
+
+## How to Configure nginx 
+```conf
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name yoonseul.link ;
+
+        root /home/ubuntu/level3_nlp_finalproject-nlp-08/frontend/build;
+        index index.html;
+
+        location /generate {
+
+                proxy_pass https://backend_server;
+                proxy_connect_timeout 500;
+                proxy_send_timeout 500;
+                proxy_read_timeout 500;
+        }
+}
+```
+
+
+## How to start nginx
+```bash
+sudo systemctl stop nginx # nginx 중단
+sudo systemctl start nginx # nginx 시작
+``````
