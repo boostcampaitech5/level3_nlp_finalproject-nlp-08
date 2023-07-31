@@ -24,6 +24,6 @@ def is_legal_question(q_sentence):
 
     print(f"filter time: {time.time() - start_time}")
     
-    if pr[0][0] >= 0.98:
+    if pr[0][0] >= 0.95:
         return True
     return False

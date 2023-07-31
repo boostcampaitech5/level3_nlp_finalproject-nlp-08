@@ -39,4 +39,5 @@ def generate_answer(q_sentence: str, model, tokenizer):
 
     print(f"generate time: {time.time() - start_time}")
     answer = tokenizer.decode(gened[0])[len_prompt:].replace("응답:", "").replace("\n\n", "\n").replace("</s>", "")
+    print(f"LLM answer: {answer}\n")
     return answer

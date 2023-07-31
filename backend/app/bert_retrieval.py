@@ -73,11 +73,11 @@ def bert_retrieve_QA(q_sentence, model, data, vector_data):
 
     similar_answer = ""
 
-    if data_cosine >= 0.6:
+    if data_cosine >= 0.75:
         similar_question = original_data["question"][top_question_idx]
         similar_answer = original_data["answer"][top_question_idx]
-        print(f"retrieve_question: {similar_question}")
-        print(f"retrieve_answer: {similar_answer}")
+        print(f"retrieve_question: {similar_question}\n")
+        print(f"retrieve_answer: {similar_answer}\n")
 
     print(f"retrieve time: {time.time() - start_time}")
 
