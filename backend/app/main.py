@@ -43,13 +43,13 @@ def startup_event():
     global tokenizer, llm, search_model, retrieve_model, retrieve_data, retrieve_vector_data, text_data, vector_data
 
     print("Load LLM")
-    peft_model_id = "YoonSeul/LawBot-level-3-KuLLM-5.8B-tae-2epoch"
-    config = PeftConfig.from_pretrained(peft_model_id)
+    model_id = "kfkas/Legal-Llama-2-ko-7b-Chat"
+    # config = PeftConfig.from_pretrained(peft_model_id)
     llm = AutoModelForCausalLM.from_pretrained(
-        config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
+        model_id, device_map={"": 0}, torch_dtype=torch.float16
     )
-    llm = PeftModel.from_pretrained(llm, peft_model_id, torch_dtype=torch.float16)
-    tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
+    # llm = PeftModel.from_pretrained(llm, peft_model_id, torch_dtype=torch.float16)
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
 
     print("Load search model")
     search_model = SentenceTransformer("jhgan/ko-sroberta-multitask")
@@ -85,6 +85,6 @@ async def generate(question: Question):
 
     answer_sentence = generate_answer(q_sentence=q_sentence, model=llm, tokenizer=tokenizer)
 
-    similar_precedent = search_precedent(q_a_sentence=q_sentence+retrieve_answer, model=search_model, text_data=text_data, vector_data=vector_data)
+    similar_precedent = search_precedent(q_a_sentence=q_sentence+retrieve_answer+answer_sentence, model=search_model, text_data=text_data, vector_data=vector_data)
 
     return Answer(answer_sentence=answer_sentence, similar_precedent=similar_precedent)
