@@ -13,7 +13,7 @@
 
 <br>
 
-## Projects BackGround
+## Project BackGround
 
 ### 기획 의도 및 기대효과 
 
@@ -69,7 +69,7 @@
 
 <br>
 
-## ⌘ 서비스 Archiecture
+## ⌘ Service Archiecture
 <img width="1653" alt="Screenshot 2023-07-31 at 12 03 17 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/5102884e-3c6f-44b8-b606-0af61dcd497e">
 
 >네이버 커넥트 재단으로부터 제공받은 V100 서버 4대를 모두 활용하기 위해 첫 설계 때부터 **서비스 확장이 쉬운 마이크로 서비스 아키텍처**를 고려했습니다. 또한 서비스 간의 상호 의존도를 낮춰 서버에 장애가 발생할 경우 전체 서비스가 중단되는 것을 방지하고자 하여 위와 같이 웹 서버, 모델 서버를 독립적으로 분리하고 API를 통해 서로 통신하는 구조로 설계했습니다. 이를 통해 한 대의 V100 서버에 장애가 발생하더라도 나머지 서비스는 전혀 영향을 받지 않고 서비스를 제공할 수 있습니다.
@@ -85,7 +85,7 @@
 
 <br>
 
-## 💿 데이터
+## 💿 Data
 <img width="1208" alt="Screenshot 2023-07-31 at 12 30 46 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/e9b220b5-ba51-489f-aa5e-c6c98cfd3eff">
 - 데이터는 위와 같이 단계별로 나누어 목표를 설정하고 데이터를 탐색, 수집, EDA 및 전처리, 생성모델을 통한 증강을 하여 학습데이터 셋을 구축하였습니다. 
 
@@ -122,7 +122,7 @@
 
 <br>
 
-## 📊 모델
+## 📊 Model
 
 <img width="1537" alt="Screenshot 2023-07-31 at 12 17 55 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/b115fc5b-093d-4955-848f-957a34f94e3f">
 
