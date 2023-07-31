@@ -12,7 +12,7 @@ function SimilarPresdent({ precedents }) {
             >
                 <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                     <ul className="space-y-2 font-medium mt-2 mb-2">
-                        {validPrecedents.map((precedent, index) => (
+                        {validPrecedents.map((validPrecedents, index) => (
                             <PrecedentCard key={index} precedent={validPrecedents} number={index + 1} />
                         ))}
                     </ul>
