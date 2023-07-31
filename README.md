@@ -203,6 +203,6 @@
 ### Links : 
 
 - [개발 관련 Notion 링크](https://uomnf97.notion.site/NLP-08-LawBot-b2dfef92f666458583d6b459af53aa66?pvs=4)
-- [Youtube 발표 영상](https://studio.youtube.com/channel/UCVtiAfQ2vx_iccoouUx5qLw/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D)
+- [Youtube 발표 영상](https://www.youtube.com/watch?v=fgboxtWM4B4)
 - Wrap-Up Report(업데이트 예정)
 
