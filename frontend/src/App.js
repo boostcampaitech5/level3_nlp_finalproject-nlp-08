@@ -1,66 +1,23 @@
 import Header from './components/Header';
+import Loader from './components/Loader';
 import ChattingSideBar from './components/ChattingSideBar';
 import SimilarPrecedent from './components/SimilarPrecedent';
-import { useState, useEffect } from 'react';
-import axios from 'axios'
+import { useState } from 'react';
 
 function App() {
-
+  const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("");
   const [sentMessage, setSentMessage] = useState("");
   const [aianswer, setAianswer] = useState("");
-  const [precedents, setPrecedents] = useState([
-    {
-      "case_name": "",
-      "case_number": "",
-      "case_type": "",
-      "ref_article": "",
-      "url": "string"
-    },
-    {
-      "case_name": "",
-      "case_number": "",
-      "case_type": "",
-      "ref_article": "",
-      "url": "string"
-    },
-    {
-      "case_name": "",
-      "case_number": "",
-      "case_type": "",
-      "ref_article": "",
-      "url": ""
-    }
-  ]);
+  const [precedents, setPrecedents] = useState(null);
 
   const messagehandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setMessage("")
     setSentMessage(message)
     setAianswer("")
-    setPrecedents([
-      {
-        "case_name": "",
-        "case_number": "",
-        "case_type": "",
-        "ref_article": "",
-        "url": "string"
-      },
-      {
-        "case_name": "",
-        "case_number": "",
-        "case_type": "",
-        "ref_article": "",
-        "url": "string"
-      },
-      {
-        "case_name": "",
-        "case_number": "",
-        "case_type": "",
-        "ref_article": "",
-        "url": ""
-      }
-    ])
+    setPrecedents(null)
     console.log(message)
     const response = await fetch('/generate', {
       method: 'POST',
@@ -69,17 +26,22 @@ function App() {
       },
       body: JSON.stringify({ q_sentence: message }),
     });
-    const data = await response.json()
+    const data = await response.json();
+    
     console.log(message)
     console.log(data)
     if (data != null) {
-      setAianswer(data.answer_sentence)
-      setPrecedents(data.similar_precedent)
+      if (data.answer_sentence == null){
+        setAianswer("죄송합니다만 저는 법률적인 내용에 관련하여 도움을 드리는 AI LawBot입니다. 법률적인 내용 외의 질문은 답변해드리지 않는 점 참고부탁드립니다. 법률적인 질문이 있으시다면 언제든지 물어보세요. 제가 최대한 자연스럽고 이해하기 쉽게 답변해 드리겠습니다. 어떤 도움이 필요하신가요?")
+        setPrecedents(null)
+      }
+      else{
+        setAianswer(data.answer_sentence);
+        setPrecedents(data.similar_precedent);
+      }
     }
+    setLoading(false)
   };
-
-
-
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -95,19 +57,19 @@ function App() {
                 <div className="flex flex-col">
                   <div className="grid grid-cols-12 gap-y-2">
                     {sentMessage && (
-                      <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                      <div className="animate-fade-up animate-delay-100 col-start-6 col-end-13 p-3 rounded-lg">
                         <div className="flex items-center justify-start flex-row-reverse">
                           <div className="flex items-center justify-center h-10 w-10 rounded-full text-white bg-indigo-500 flex-shrink-0">
                             U
                           </div>
-                          <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+                          <div className="animate-fade-up relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
                             <div>{sentMessage}</div>
                           </div>
                         </div>
                       </div>
                     )}
                     {aianswer && (
-                      <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                      <div className="animate-fade-up animate-delay-100 col-start-1 col-end-8 p-3 rounded-lg">
                         <div className="flex flex-row items-center">
                           <div
                             className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-300 flex-shrink-0"
@@ -121,6 +83,7 @@ function App() {
                           </div>
                         </div>
                       </div>)}
+                      {!aianswer && loading && (<Loader />)}
                   </div>
                 </div>
               </div>
