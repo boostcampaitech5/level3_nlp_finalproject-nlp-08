@@ -13,7 +13,7 @@
 
 <br>
 
-## Projects BackGround
+## Project BackGround
 
 ### 기획 의도 및 기대효과 
 
@@ -69,7 +69,7 @@
 
 <br>
 
-## ⌘ 서비스 Archiecture
+## ⌘ Service Archiecture
 <img width="1653" alt="Screenshot 2023-07-31 at 12 03 17 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/5102884e-3c6f-44b8-b606-0af61dcd497e">
 
 >네이버 커넥트 재단으로부터 제공받은 V100 서버 4대를 모두 활용하기 위해 첫 설계 때부터 **서비스 확장이 쉬운 마이크로 서비스 아키텍처**를 고려했습니다. 또한 서비스 간의 상호 의존도를 낮춰 서버에 장애가 발생할 경우 전체 서비스가 중단되는 것을 방지하고자 하여 위와 같이 웹 서버, 모델 서버를 독립적으로 분리하고 API를 통해 서로 통신하는 구조로 설계했습니다. 이를 통해 한 대의 V100 서버에 장애가 발생하더라도 나머지 서비스는 전혀 영향을 받지 않고 서비스를 제공할 수 있습니다.
@@ -85,7 +85,7 @@
 
 <br>
 
-## 💿 데이터
+## 💿 Data
 <img width="1208" alt="Screenshot 2023-07-31 at 12 30 46 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/e9b220b5-ba51-489f-aa5e-c6c98cfd3eff">
 - 데이터는 위와 같이 단계별로 나누어 목표를 설정하고 데이터를 탐색, 수집, EDA 및 전처리, 생성모델을 통한 증강을 하여 학습데이터 셋을 구축하였습니다. 
 
@@ -94,6 +94,7 @@
 <img width="1552" alt="Screenshot 2023-07-31 at 12 31 04 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/05c47fc3-e2ff-4997-9396-effcbf966a7b">
 - 데이터 파이프라인을 도식화한 순환 DMOps 구조도는 위와 같습니다. 
 
+<br>
 <br>
 
 >**법률 QA 데이터**
@@ -116,14 +117,15 @@
 
 <br>
 
-- 데이터 전처리, EDA, 증강에 대한 자세한 내용은 아래에서 확인하실 수 있습니다. 
-  - 💿[데이터 수집](!https://uomnf97.notion.site/a5f4628cdc7b4ce3928ce626c727ff32?pvs=4)
+- 데이터 전처리, EDA, 증강에 대한 자세한 내용은 아래에서 확인하실 수 있습니다.
+  
+  - 💿[데이터 수집](https://uomnf97.notion.site/a5f4628cdc7b4ce3928ce626c727ff32?pvs=4)
   - 📈[EDA 및 전처리](https://uomnf97.notion.site/EDA-b53d75aaa7574ea586cbd6cdbd5c755a?pvs=4)
   - 🛠️[생성모델을 통한 데이터 증강](https://uomnf97.notion.site/5e8e9ecc27694d7497fbad68f72136c0?pvs=4)
 
 <br>
 
-## 📊 모델
+## 📊 Model
 
 <img width="1537" alt="Screenshot 2023-07-31 at 12 17 55 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/b115fc5b-093d-4955-848f-957a34f94e3f">
 
@@ -152,7 +154,7 @@
 - LLM 모델은 명확한 평가지표가 없어 직접 평가지표를 만들어 평가했습니다. 평가지표를 만들 때 고려했던 부분은 도메인 특성상 법률적인 정확도가 중요하므로 법률적인 정확도와 언어의 자연스러움 두가지 모두 평가할 수 있도록 metric을 제작하여 평가했습니다. 
 
 **[ Dialogue Evaluation Metric ]**
-- Kullm 모델의 Dialogue Evaluation Metric 평가요소를 도메인에 맞게 변형하여 활용하였고, 해당 지표를 직접 변호사에게 의뢰하여 답변을 평가했습니다. 추가로 모든 모델들은 모델 A, B, C ... 등 모델 이름을 가리고 블라인드 평가를 진행했므여, 명확한 평가지표를 만들기 위해 ChatGPT, BARD 모델과 함께 평가를 진행하였스빈다. 최종적으로 저희가 구축한 **kfkas/legal-llama-2-ko-7b-Chat** 모델이 가장 좋은 성능을 보였습니다. 
+- Kullm 모델의 Dialogue Evaluation Metric 평가요소를 도메인에 맞게 변형하여 활용하였고, 해당 지표를 직접 변호사에게 의뢰하여 답변을 평가했습니다. 추가로 모든 모델들은 모델 A, B, C ... 등 모델 이름을 가리고 블라인드 평가를 진행했으며, 명확한 평가지표를 만들기 위해 ChatGPT, BARD 모델과 함께 평가를 진행하였습니다. 최종적으로 저희가 구축한 **kfkas/legal-llama-2-ko-7b-Chat** 모델이 가장 좋은 성능을 보였습니다. 
 
 <img width="1584" alt="Screenshot 2023-07-31 at 12 56 06 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/9cc5938c-2559-42ac-a478-78554a5befc6">
 
@@ -190,19 +192,17 @@
 
 - 노션 :
   - Kanban Board를 이용하여 체계적으로 To do List 관리
-  - 노션 협업기구를 활용해 회의 및 기록 체계화
-<img width="1579" alt="Screenshot 2023-07-31 at 12 38 10 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/ecc791e2-6001-44c1-bdc1-3fb3d4c61f39">
+  - 노션 협업기구를 활용해 회의 및 기록 체계화å<img width="1579" alt="Screenshot 2023-07-31 at 12 38 10 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/ecc791e2-6001-44c1-bdc1-3fb3d4c61f39">
 
 - GitHub : 
   - Github Flow를 이용하여 브랜치 전략 수립
-  - PR Template, Issue Template을 이용하여 체계젹으로 관리하였습니다.
-  - Ground Rule을 정해 모두 일관된 Commit convention을 유지
-  <img width="1422" alt="Screenshot 2023-07-31 at 12 38 50 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/2fdfce62-6c07-4e36-8312-1588e5204653">
+  - PR Template, Issue Template을 이용하여 체계젹으로 관리.
+  - Ground Rule을 정해 모두 일관된 Commit convention을 유지<img width="1422" alt="Screenshot 2023-07-31 at 12 38 50 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/2fdfce62-6c07-4e36-8312-1588e5204653">
 
 
 ### Links : 
 
 - [개발 관련 Notion 링크](https://uomnf97.notion.site/NLP-08-LawBot-b2dfef92f666458583d6b459af53aa66?pvs=4)
-- [Youtube 발표 영상](https://studio.youtube.com/channel/UCVtiAfQ2vx_iccoouUx5qLw/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D)
+- [Youtube 발표 영상](https://www.youtube.com/watch?v=fgboxtWM4B4)
 - Wrap-Up Report(업데이트 예정)
 

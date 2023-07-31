@@ -6,7 +6,7 @@ import torch
 def generate_answer(q_sentence: str, model, tokenizer):
     model.eval()
     model.config.use_cache = True  # silence the warnings. Please re-enable for inference!
-    model.float()
+    # model.float()
     tokenizer.pad_token = tokenizer.eos_token
 
     device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
@@ -24,10 +24,10 @@ def generate_answer(q_sentence: str, model, tokenizer):
             return_tensors='pt',
             return_token_type_ids=False
         ).to(device),
-        max_new_tokens=512,
+        max_new_tokens=1024,
         early_stopping=True,
         do_sample=True,
-        # eos_token_id=2,
+        eos_token_id=2,
         # temperature=1e-5,
         top_k=5,
         top_p=0.95,

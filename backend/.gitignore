@@ -4,3 +4,9 @@ model
 test.ipynb
 data
 nohup.out
+logs
+airflow.cfg
+airflow.db
+webserver_config.py
+.env
+airflow-webserver.pid
