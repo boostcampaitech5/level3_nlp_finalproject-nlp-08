@@ -94,13 +94,14 @@
 |대한법률구조공단의 국내 사이버상담 데이터|2463|https://www.klac.or.kr/legalstruct/cyberConsultation.do|
 |Open AI GPT증강|8666| - |
 
+<br>
 >**판례 데이터**
 
 | 데이터셋 이름 | 데이터 개수 | 출처 |
 | --- | --- | --- |
 | 법률/규정 (판결서, 약관 등) 텍스트 분석 데이터 |77382| https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=580 |
 
-
+<br>
 
 - 데이터 전처리, EDA, 증강에 대한 자세한 내용은 아래에서 확인하실 수 있습니다. 
   - 💿[데이터 수집](!https://uomnf97.notion.site/a5f4628cdc7b4ce3928ce626c727ff32?pvs=4)
