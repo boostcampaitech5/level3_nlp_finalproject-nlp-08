@@ -2,7 +2,7 @@ function PrecedentCard({ precedent, number }) {
     return (
         <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">유사 판례 조항 {number}</h5>
-            <p className="font-small text-gray-700 dark:text-gray-400">사건 케이스 : {precedent.case_name}</p>
+            <p className="font-small text-gray-700 dark:text-gray-400">사건 이름 : {precedent.case_name}</p>
             <p className="font-small text-gray-700 dark:text-gray-400">사건 번호 : {precedent.case_number}</p>
             <p className="font-small text-gray-700 dark:text-gray-400">사건 분류 : {precedent.case_type}</p>
             <p className="font-small text-gray-700 dark:text-gray-400">관련 법 조항 :{precedent.ref_article}</p>
