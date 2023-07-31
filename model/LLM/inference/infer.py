@@ -12,36 +12,59 @@ def gen(x, model, tokenizer, device):
         **tokenizer(prompt, return_tensors="pt", return_token_type_ids=False).to(
             device
         ),
-        max_new_tokens=256,
+        max_new_tokens=1024,
         early_stopping=True,
         do_sample=True,
+        top_k=20,
+        top_p=0.92,
+        no_repeat_ngram_size=3,
         eos_token_id=2,
+        repetition_penalty=1.2,
+        num_beams=3,
     )
     return tokenizer.decode(gened[0])[len_prompt:]
 
 
-def LLM_infer(input):
+def LLM_infer(input, model_type):
     device = (
         torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
     )
-    peft_model_id = "kfkas/LawBot-v1_koalpaca_legalQA_easylaw"
-    config = PeftConfig.from_pretrained(peft_model_id)
-    model = AutoModelForCausalLM.from_pretrained(
-        config.base_model_name_or_path, device_map={"": 0}, torch_dtype=torch.float16
-    )
-    model = PeftModel.from_pretrained(model, peft_model_id, torch_dtype=torch.float16)
-    tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
+    if model_type == "kullm":
+        peft_model_id = "YoonSeul/LawBot-level-3-KuLLM-5.8B-tae-2epoch"
+        config = PeftConfig.from_pretrained(peft_model_id)
+        model = AutoModelForCausalLM.from_pretrained(
+            config.base_model_name_or_path,
+            device_map={"": 0},
+            torch_dtype=torch.float16,
+        )
+        model = PeftModel.from_pretrained(
+            model, peft_model_id, torch_dtype=torch.float16
+        )
+        tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)
 
-    model.eval()
-    model.config.use_cache = (
-        True  # silence the warnings. Please re-enable for inference!
-    )
-    model.float()
-    tokenizer.pad_token = tokenizer.eos_token
+        model.eval()
+        model.config.use_cache = (
+            True  # silence the warnings. Please re-enable for inference!
+        )
+        tokenizer.pad_token = tokenizer.eos_token
+    else:
+        model_id = "kfkas/Legal-Llama-2-ko-7b-Chat"
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            device_map={"": 0},
+            torch_dtype=torch.float16,
+            low_cpu_mem_usage=True,
+        )
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
+        model.eval()
+        model.config.use_cache = True
+        tokenizer.pad_token = tokenizer.eos_token
     output = gen(input, model=model, tokenizer=tokenizer, device=device)
 
     return output
 
 
 if __name__ == "__main__":
-    text = LLM_infer("LLM입력")
+    model_type = "kullm"  # llama, kullm
+    input = "음주운전을하면 어떤 법으로 처벌 되나요?"
+    text = LLM_infer(input, model_type)
