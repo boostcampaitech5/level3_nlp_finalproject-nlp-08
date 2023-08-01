@@ -11,6 +11,7 @@ function App() {
   const [sentMessage, setSentMessage] = useState("");
   const [aianswer, setAianswer] = useState("");
   const [precedents, setPrecedents] = useState(null);
+  const ans = " 질문은 AI가 작성한 답변이며 실제와 다를 수 있으므로 참고 자료로만 활용하시고, 자세한 상담을 원하시는 경우에는 전문 법조인의 상담을 받으시기 바랍니다. LawBot은 법적 책임을 지지 않는다는 점 참고바랍니다."
 
   const messagehandler = async (e) => {
     e.preventDefault();
@@ -22,27 +23,31 @@ function App() {
       setPrecedents(null);
       try {
         console.log(message);
-
-        const response = await fetch('/generate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ q_sentence: message }),
-        });
-
-        const data = await response.json();
-        console.log(message);
-        console.log(data);
-
-        if (data != null) {
-          if (data.answer_sentence == null) {
-            setAianswer("죄송합니다. 저는 법률 상담을 도와드리는 AI LawBot입니다. 법률적인 내용 외의 질문은 답변해 드리지 않는 점 참고 부탁드립니다. 법률적인 질문이 있으시다면 언제든지 물어보세요. 제가 최대한 자연스럽고 이해하기 쉽게 답변해 드리겠습니다. 어떤 도움이 필요하신가요?");
-            setPrecedents(null);
-          } else {
-            setAianswer(data.answer_sentence);
-            setPrecedents(data.similar_precedent);
-          }
+        console.log(message.trim().length)
+        if (message.trim().length <= 5) {
+          setAianswer("죄송합니다. 입력하신 \""+message+"\"는 상세하게 설명되지 않아서 정확한 답변을 제공하기 어려운 점 양해해주시기 바랍니다. 본인이 처한 상황과 궁금한 부분에 대해 가능한 모든 세부 정보와 배경을 제공해주시면, 보다 정확하고 효과적인 답변을 드릴 수 있습니다. 감사합니다.");
+        } else {
+            const response = await fetch('/generate', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ q_sentence: message }),
+            });
+    
+            const data = await response.json();
+            console.log(message);
+            console.log(data);
+    
+            if (data != null) {
+              if (data.answer_sentence == null) {
+                setAianswer("죄송합니다. 저는 법률 상담을 도와드리는 AI LawBot입니다. 법률 내용 외의 질문은 답변해 드리지 않는 점 참고 부탁드립니다. 법률적인 질문이 있으시다면 언제든지 물어보세요. 제가 최대한 자연스럽고 이해하기 쉽게 답변해 드리겠습니다. 어떤 도움이 필요하신가요?");
+                setPrecedents(null);
+              } else {
+                  setAianswer(data.answer_sentence+ans);
+                  setPrecedents(data.similar_precedent);
+              }
+            }
         }
       } catch (error) {
         console.error("에러 발생:", error);
@@ -91,7 +96,7 @@ function App() {
                           </div>
                         </div>
                       </div>)}
-                      {!aianswer && loading && (<Loader />)}
+                      {loading && (<Loader />)}
                   </div>
                 </div>
               </div>
