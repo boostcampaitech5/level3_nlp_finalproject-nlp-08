@@ -50,15 +50,15 @@ class Autodata:
         return data.shuffle()
 
 def load_model(model_name):
-    bnb_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_use_double_quant=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.bfloat16,
-    )
+    # bnb_config = BitsAndBytesConfig(
+    #     load_in_4bit=True,
+    #     bnb_4bit_use_double_quant=True,
+    #     bnb_4bit_quant_type="nf4",
+    #     bnb_4bit_compute_dtype=torch.bfloat16,
+    # )
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, quantization_config=bnb_config, device_map={"": 0}
+        model_name
     )
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
@@ -96,7 +96,7 @@ def train_model():
     model_id = "nlpai-lab/kullm-polyglot-5.8b-v2"
     model, tokenizer = load_model(model_id)
     tokenizer.pad_token = tokenizer.eos_token
-    BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))), "data")
+    BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "data")
     TRAIN_DATA_PATH = os.path.join(BASE_DIR, "train_data.csv")
     EVAL_DATA_PATH = os.path.join(BASE_DIR, "eval_data.csv")
     train_data = Autodata(data_path=TRAIN_DATA_PATH, tokenizer=tokenizer).tokenizer_dataset
