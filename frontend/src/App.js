@@ -25,7 +25,7 @@ function App() {
         console.log(message);
         console.log(message.trim().length)
         if (message.trim().length <= 5) {
-          setAianswer("죄송합니다. 입력하신 \""+message+"\"는 너무 짧아 정확한 답변을 제공하기 어려운 점 양해해주시기 바랍니다.정확하고 효과적인 답변을 위해 더욱 구체적으로 질문해주시기 바랍니다.");
+          setAianswer("죄송합니다. 입력하신 \""+message+"\"는 너무 짧아 정확한 답변을 제공하기 어려운 점 양해해주시기 바랍니다. 정확하고 효과적인 답변을 위해 더욱 구체적으로 질문해주시기 바랍니다.");
         } else {
             const response = await fetch('/generate', {
               method: 'POST',
