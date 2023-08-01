@@ -15,7 +15,7 @@ jobs:
   CI:
     runs-on: self-hosted
     env:
-      working-directory: level3_nlp_finalproject-nlp-08
+      working-directory: /opt/ml/level3_nlp_finalproject-nlp-08
 
     steps:
     - name: Update Code
@@ -24,12 +24,12 @@ jobs:
       
     - name: install dependencies
       run: |
-        source github_actions/bin/activate
+        source final_project/bin/activate
         pip install -r requirements.txt
       working-directory: "${{ env.working-directory }}/backend"
       
     - name: Test with pytest
       run: |
-        source github_actions/bin/activate
+        source final_project/bin/activate
         pytest
       working-directory: "${{ env.working-directory }}/backend"
