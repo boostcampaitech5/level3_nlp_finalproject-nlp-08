@@ -15,6 +15,7 @@ nvm install 18.04.0
 npm install -g yarn
 yarn add tailwindcss postcss autoprefixer 
 npx tailwindcss init
+npm i tailwindcss-animated
 ```
 
 When installation is completed, please run the following commands to check if proper version is installed. <br/>

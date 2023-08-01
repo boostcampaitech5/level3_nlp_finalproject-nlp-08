@@ -7,9 +7,11 @@ function Header() {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center justify-start">
                         <img src={lawbot} className="h-8 mr-3" alt="FlowBite Logo" />
-                        <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                            LawBot
-                        </span>
+                        <a href="/">
+                            <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                                LawBot
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
