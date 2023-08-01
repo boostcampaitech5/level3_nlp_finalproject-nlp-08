@@ -2,7 +2,7 @@
 
 ## ⚠️ Requirements for Web Frontend
 
-Below is the commands for installing dependency packages to run web prototype. <br/>
+Below is the commands for installing dependency packages to run web frontend. <br/>
 Run the following commands in proper order.
 ```bash
 # install react
@@ -32,7 +32,21 @@ npm -v # v8.11.0
 yarn start # npm start
 ```
 
-## How to Configure nginx 
+## How to Configure nginx
+
+- Below is the commands for installing dependency packages to run web frontend
+
+```
+sudo apt install nginx
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+
+sudo vim /etc/nginx/sites-available/frontend.conf
+sudo ln -s /etc/nginx/sites-available/myapp.conf /etc/nginx/sites-enabled/myapp.conf
+```
+
+- The configuration files that you need to write in `/etc/nginx/sites-available`
+
 ```conf
 server {
         listen 80;
