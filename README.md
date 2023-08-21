@@ -157,7 +157,7 @@
 
 ### 1️⃣ Similar Precedent Model 
 <img width="1516" alt="Screenshot 2023-07-31 at 12 48 08 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/dd67685f-5682-4bc7-9104-170de86fb37a">
-
+ 
 <br>
 
 ### 2️⃣ LLM 모델 
