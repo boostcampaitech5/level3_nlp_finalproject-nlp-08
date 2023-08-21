@@ -44,6 +44,8 @@
 
 ![예시-케이스](https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/03d80449-819c-4c63-9c1c-6e0492230ba8)
 
+
+
 >1. 웹 서버 접속
 >2. 메시지 프롬프트 창에 자신이 처한 법적 분쟁 상황 및 연관된 질문 입력 
 >3. AI 모델이 상황 맥락을 이해하여 가이드라인을 메시지 형태로 제공
@@ -71,6 +73,8 @@
 
 ### 👨🏼‍💻 역할 분담
 <img width="1504" alt="Screenshot 2023-08-20 at 11 21 39 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/dd0e497a-e2a4-432b-b501-5769453c08ef">
+
+<br>
 
 ## 🗓️ Project TimeLine
 - 초기에 핵심 기능을 우선적으로 개발하였고, 그 후 팀원들의 의견을 수렴하여 지속적으로 발전시키는 애자일적인 접근 방식을 적용하여 서비스 고도화 작업을 진행했습니다.
@@ -111,7 +115,7 @@
 <br>
 
 
-### 법률 QA 데이터
+### 1️⃣ 법률 QA 데이터
 
 | 데이터셋 이름 | 데이터 개수 | 출처 |
 | :---: | :---: | :---: |
@@ -123,7 +127,7 @@
 
 <br>
 
-### 판례 데이터
+### 2️⃣ 판례 데이터
 
 | 데이터셋 이름 | 데이터 개수 | 출처 |
 | :---: | :---: | :---: |
@@ -150,24 +154,24 @@
 
 <br>
 
-### Question Filtering Model 
+### 1️⃣ Question Filtering Model 
 <img width="1516" alt="Screenshot 2023-07-31 at 12 47 58 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/582ed391-bdea-4c08-b942-6cf8eab163b8">
 
 <br>
 
-### 1️⃣ Similar Precedent Model 
+### 2️⃣ Similar Precedent Model 
 <img width="1516" alt="Screenshot 2023-07-31 at 12 48 08 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/dd67685f-5682-4bc7-9104-170de86fb37a">
  
 <br>
 
-### 2️⃣ LLM 모델 
+### 3️⃣LLM 모델 
 
 <img width="1566" alt="Screenshot 2023-07-31 at 12 48 28 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/c7e22058-7901-40f8-b0c8-e7d72564d521">
 
 
 - 구축한 모델 리스트(활용한 데이터 + Backbone 모델)<br><img width="1573" alt="Screenshot 2023-08-21 at 5 35 27 PM" src="https://github.com/boostcampaitech5/level3_nlp_finalproject-nlp-08/assets/81630351/873b6103-8ed9-4696-8072-3a2bcd13c6f1">
 
-#### 3️⃣ 평가지표 
+#### 평가지표 
 - LLM 모델은 명확한 평가지표가 없어 직접 평가지표를 만들어 평가했습니다. 평가지표를 만들 때 고려했던 부분은 도메인 특성상 법률적인 정확도가 중요하므로 법률적인 정확도와 언어의 자연스러움 두가지 모두 평가할 수 있도록 metric을 제작하여 평가했습니다. 
 
 <br>
